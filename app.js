@@ -1,3 +1,6 @@
+import express from 'express';
+const app = express();
+
 const library = [
     {
     "title": "Robinson Crusoe",
@@ -31,4 +34,20 @@ const library = [
   "id": 2
 },
 ]
+
+app.get('/book', (req, res) => {
+  return res.send(library);
+});
+
+app.post('/book', (req, res) => {
+  const book = req.body;
+  library.push(book)
+  return res.send("ok");
+});
+
+app.get('/book/{bookId}', (req, res) => {
+  const bookId = 1;
+  return res.send(library.find(book => book.id === bookId));
+});
+
 
