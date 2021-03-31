@@ -1,4 +1,4 @@
-import express from 'express';
+const express = require('express');
 const app = express();
 
 const library = [
@@ -35,6 +35,7 @@ const library = [
 },
 ]
 
+
 app.get('/book', (req, res) => {
   return res.send(library);
 });
@@ -45,9 +46,13 @@ app.post('/book', (req, res) => {
   return res.send("ok");
 });
 
-app.get('/book/{bookId}', (req, res) => {
-  const bookId = 1;
-  return res.send(library.find(book => book.id === bookId));
+app.get('/book/:bookId', (req, res) => {
+  const bookId = (req.params.bookId);
+  return res.send(library.find(book => book.id == bookId));
+  
 });
+
+app.listen(3005, console.log("server is running"));
+
 
 
