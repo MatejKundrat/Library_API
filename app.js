@@ -1,5 +1,9 @@
 const express = require('express');
 const app = express();
+const bp = require('body-parser')
+app.use(bp.json());
+app.use(bp.urlencoded({extended: true}));
+
 
 const library = [
     {
@@ -41,9 +45,8 @@ app.get('/book', (req, res) => {
 });
 
 app.post('/book', (req, res) => {
-  const book = req.body;
-  library.push(book)
-  return res.send("ok");
+  library.push(req.body);
+  return res.send(library);
 });
 
 app.get('/book/:bookId', (req, res) => {
@@ -51,6 +54,18 @@ app.get('/book/:bookId', (req, res) => {
   return res.send(library.find(book => book.id == bookId));
   
 });
+
+// app.delete('/book/:bookId', (req, res) => {
+//   const bookId = (req.params.bookId);
+//   liberary.splice()
+//   return res.send(library.find(book => book.id == bookId));
+  
+// });
+
+// app.get('/book/tags', (req, res) => {
+//   return res.send(library);
+  
+// });
 
 app.listen(3005, console.log("server is running"));
 
