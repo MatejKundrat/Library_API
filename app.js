@@ -55,17 +55,22 @@ app.get('/book/:bookId', (req, res) => {
   
 });
 
-// app.delete('/book/:bookId', (req, res) => {
-//   const bookId = (req.params.bookId);
-//   liberary.splice()
-//   return res.send(library.find(book => book.id == bookId));
+app.delete('/book/:bookId', (req, res) => {
+  const bookId = (req.params.bookId);
+  library.splice();
+  return res.send(library.find(book => book.id == bookId));
   
-// });
+}); //zatial nefunguje
 
 // app.get('/book/tags', (req, res) => {
 //   return res.send(library);
   
 // });
+
+app.put('/book/bookID', function(req, res){
+  data[params['Book']]['completed'] = req.data.completed;
+
+}); //este neni vyladeny
 
 app.listen(3005, console.log("server is running"));
 
