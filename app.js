@@ -44,9 +44,15 @@ app.get('/book', (req, res) => {
   return res.send(library);
 });
 
-app.post('/book', (req, res) => {
-  library.push(req.body);
-  return res.send(library);
+
+
+app.get('/book/tags', (req, res) => {
+  var arrTag = [];
+  for ( var book of library) {
+    arrTag.push(book.tags)
+  }
+  return res.send(arrTag);
+  
 });
 
 app.get('/book/:bookId', (req, res) => {
@@ -55,6 +61,10 @@ app.get('/book/:bookId', (req, res) => {
   
 });
 
+app.post('/book', (req, res) => {
+  library.push(req.body);
+  return res.send(library);
+});
 app.delete('/book/:bookId', (req, res) => {
   const bookId = (req.params.bookId);
   library.splice();
@@ -62,10 +72,6 @@ app.delete('/book/:bookId', (req, res) => {
   
 }); //zatial nefunguje
 
-// app.get('/book/tags', (req, res) => {
-//   return res.send(library);
-  
-// });
 
 app.put('/book/bookID', function(req, res){
   data[params['Book']]['completed'] = req.data.completed;
