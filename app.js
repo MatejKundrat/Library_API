@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const bp = require('body-parser')
+const bp = require('body-parser');
 app.use(bp.json());
 app.use(bp.urlencoded({extended: true}));
 
@@ -36,15 +36,11 @@ const library = [
     "novel"
   ],
   "id": 2
-},
-]
-
+}]
 
 app.get('/book', (req, res) => {
   return res.send(library);
 });
-
-
 
 app.get('/book/tags', (req, res) => {
   var arrTag = [];
@@ -65,18 +61,27 @@ app.post('/book', (req, res) => {
   library.push(req.body);
   return res.send(library);
 });
+
 app.delete('/book/:bookId', (req, res) => {
   const bookId = (req.params.bookId);
-  library.splice();
-  return res.send(library.find(book => book.id == bookId));
+  library.pop(library.find(book => book.id == bookId));
+  return res.send(library);
   
-}); //zatial nefunguje
+}); 
 
 
-app.put('/book/bookID', function(req, res){
-  data[params['Book']]['completed'] = req.data.completed;
-
-}); //este neni vyladeny
+// app.put('/book/:bookID', function(req, res){
+//   var bookId = (req.params.bookId);
+//   var updateBook = req.body; 
+//   var book = library.find(book => book.id == bookId);
+//   library.pop(book);
+//   // book.title = updateBook.title;
+//   // book.author = updateBook.author;
+//   // book.pages = updateBook.pages;
+//   // book.tags = updateBook.tags;
+//   library.push(updateBook);
+  // return res.send(library);
+  // });
 
 app.listen(3005, console.log("server is running"));
 
